@@ -16,7 +16,11 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "OpenAI Demo" }}
+            />
             <Stack.Screen name="Generated" component={GeneratedScreen} />
           </Stack.Navigator>
         </NavigationContainer>
