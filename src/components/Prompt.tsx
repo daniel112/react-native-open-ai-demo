@@ -13,7 +13,12 @@ import { createWormhole } from "react-native-wormhole";
 import * as Babel from "@babel/standalone";
 
 import { useCompletion } from "../hooks";
-
+/**
+ * Notes for Wormhole
+ * - Wormhole attempts to create a js function via the passed in transpiled string or uri
+ * see createWormhole.js > buildCreateComponent() in node_modules
+ * - Because we're trusting the AI to generate the code, if the AI generated code is not syntactically correct, it can crash the app
+ */
 const { Wormhole: DefaultWormhole } = createWormhole({
   global: {
     require: (moduleId: string) => {
@@ -21,6 +26,8 @@ const { Wormhole: DefaultWormhole } = createWormhole({
         return require("react");
       } else if (moduleId === "react-native") {
         return require("react-native");
+      } else if (moduleId === "react-native-paper") {
+        return require("react-native-paper");
       }
       return null;
     },
