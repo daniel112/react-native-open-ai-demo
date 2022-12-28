@@ -5,7 +5,6 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Alert, View } from "react-native";
 import Constants from "expo-constants";
 import { Prompt } from "./src/components";
-import { SafeAreaView } from "react-native";
 console.log(Constants?.expoConfig?.extra?.openAiApiKey);
 
 export default function App() {
@@ -29,9 +28,8 @@ export default function App() {
           []
         )}
         prompt={[
-          "A complete example of React Native functional component with two rows. first row is a horizontal scrollview of random images. Second row is a vertical flatList underneath with random baby names.",
-          "Images are fetched from https://imgur.com/",
-          "Make sure all imports are valid.",
+          "A complete example of React Native functional component with two rows. first row is a horizontal scrollview of images, with https://cataas.com/cat as the source uri Second row is a vertical flatList underneath with hard-coded strings.",
+          // "Images are fetched using fetch API from https://imgur.com/",
         ].join(" ")}
       />
       <StatusBar style="auto" />

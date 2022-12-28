@@ -3,7 +3,7 @@ import {
   StyleProp,
   ScrollView,
   StyleSheet,
-  View,
+  ActivityIndicator,
   ViewStyle,
   Text,
   SafeAreaView,
@@ -46,7 +46,7 @@ function Prompt<T>({
   readonly extraProps?: T;
   readonly Wormhole?: ReturnType<typeof createWormhole>["Wormhole"];
 }): JSX.Element {
-  const { completion, error } = useCompletion({
+  const { completion, error, loading } = useCompletion({
     ...completionSettings,
     prompt,
   });
@@ -57,9 +57,15 @@ function Prompt<T>({
   console.log({ choice });
   const onError = React.useCallback(() => undefined, []);
 
+  if (loading) {
+    return (
+      <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
+        <ActivityIndicator size="large" />
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={style}>
-      {/* <View style={StyleSheet.absoluteFill}> */}
       <Wormhole
         {...extraProps}
         source={Babel.transform(choice, { presets: ["es2015", "react"] }).code}
@@ -71,7 +77,6 @@ function Prompt<T>({
           <Text children={choice || String(error)} />
         </ScrollView>
       )}
-      {/* </View> */}
     </SafeAreaView>
   );
 }
